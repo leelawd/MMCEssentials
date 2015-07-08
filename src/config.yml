@@ -1,0 +1,43 @@
+###############################################################################
+#						                                      MMCEssentials                                                         
+#  				                                         By Lee_lawd93                                                                                   
+###############################################################################
+
+autorestart: 
+  # Enable / Disable auto restarts  
+  enable: false
+  # How often the server restarts (in hours, 0.5 = 30 minutes) 
+  interval: 6
+  
+timer:
+  # warning times before reboot in minutes (0.5 = 30 minutes)   
+  warning-broadcast:
+  - 10
+  - 5
+  - 4
+  - 3
+  - 2
+  - 1
+  - 0.5
+  # Time before another vote to restart can begin. (In minutes)  
+  re-vote: 10
+  # How long should it be before players are allowed to start a vote after the server has restarted (In minutes) 
+  start-vote: 60
+  # % of online players to vote yes before a restart is triggered.
+  vote-percent: 60
+  #The required amount of players online to start a vote    
+  minimum-players: 10
+  
+voting:
+  # Enable or Disable the ability for players to vote for a server restart
+  enable: true
+  
+  
+hideplugins:
+  # Enable or Disable hiding the plugin's list
+  enabled: true
+  # The list of 'fake' plugin's to display. (Separate plugin's using , )
+  list: There, is, nothing, to, see, here
+  
+# DO NOT TOUCH - THIS WILL ERASE YOUR CONFIG SETTINGS
+version: 1

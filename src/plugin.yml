@@ -1,0 +1,60 @@
+name: MMCEssentials
+main: net.moddedminecraft.mmcessentials.MMCEssentials
+version: 0.5
+author: Lee_lawd93
+depend: [ProtocolLib]
+commands:
+   mmce:
+      description: Main command for MMC Essentials.
+      usage: |
+            usage:
+                /MMCE help
+   reboot:
+      description: restart the server!
+      usage: |
+            usage:
+                /Reboot help
+permissions:
+  mmcessentials.*:
+    description: Provide all the permissions.
+    children:
+      mmcessentials.reload: true
+      mmcessentials.reboot.now: true
+      mmcessentials.reboot.autorestart: true
+      mmcessentials.reboot.vote: true
+      mmcessentials.reboot.vote.bypass: true
+      mmcessentials.reboot.cancel: true
+      mmcessentials.reboot.debug: true
+      mmcessentials.reboot.schedule: true
+      mmcessentials.hideplugins.bypass: true
+    default: op
+  mmcessentials.reload:
+    description: Reload of the config.yml.
+    default: op
+  mmcessentials.reboot.now:
+    description: reboot the server immediatly.
+    default: op
+  mmcessentials.reboot.autorestart:
+    description: Enable or Disable the auto restart function.
+    default: op
+  mmcessentials.reboot.vote:
+    description: Start a vote for a restart.
+    default: op
+  mmcessentials.reboot.vote.bypass:
+    description: Bypass the vote restrictions (players online, time limits)
+    default: op
+  mmcessentials.reboot.limit:
+    description: Limit the time scheduled restart to between 1-5 minutes
+    default: false
+  mmcessentials.reboot.cancel:
+    description: Cancel any exsisting restart / vote
+    default: op
+  mmcessentials.reboot.debug:
+    description: Debug commands
+    default: op
+  mmcessentials.reboot.schedule:
+    description: Schedule a restart after a given time.
+    default: op
+  mmcessentials.hideplugins.bypass:
+    description: Bypass the hide plugin's function to show the real information.
+    default: op
