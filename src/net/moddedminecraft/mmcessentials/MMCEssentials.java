@@ -25,6 +25,9 @@ import net.moddedminecraft.mmcessentials.utils.Util;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.Material;
+import org.bukkit.block.Block;
+import org.bukkit.block.BlockFace;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -32,6 +35,7 @@ import org.bukkit.scoreboard.DisplaySlot;
 import org.bukkit.scoreboard.Objective;
 import org.bukkit.scoreboard.Score;
 import org.bukkit.scoreboard.Scoreboard;
+import org.bukkit.util.BlockIterator;
 
 import com.comphenix.protocol.PacketType;
 import com.comphenix.protocol.ProtocolLibrary;
@@ -56,14 +60,14 @@ public class MMCEssentials extends JavaPlugin {
 	public static int yesVotes = 0;
 	public static ArrayList<Player> hasVoted = new ArrayList<Player>();
 	public ArrayList<String> plugins = new ArrayList<String>();
-	
+
 	public static int playersOnline;
 	public static int voteSeconds;
 
 	public boolean justStarted = true;
 	public boolean isRestarting = false;
 	public String reason;
-	
+
 	public String version;
 	public String name;
 
@@ -73,33 +77,34 @@ public class MMCEssentials extends JavaPlugin {
 	public Timer justStartedTimer;
 
 	public static long startTimestamp;
-	
+
 	public void onEnable() {
 		PluginManager pm = getPluginManager();
 		version = getDescription().getVersion();
 		name = getDescription().getName();
 		final List<String> hiddenCommands = new ArrayList<String>();
 		hiddenCommands.add("all");
-		
+
 		if(pm.getPlugin("ProtocolLib") != null) {
 			preventTabComplete();
 		} else {
 			log.info("[MMCEssentials] ProtocalLib not found. Disabling support.");
 		}
-		
+
 		Config.loadConfiguration(this);
+		getCommand("blockinfo").setExecutor(new MMCECommand(plugin));
 		getCommand("mmce").setExecutor(new MMCECommand(plugin));
 		getCommand("reboot").setExecutor(new RebootCommand(plugin));
 		pm.registerEvents(new PlayerListener(this), this);
 		pm.registerEvents(new CommandListener(this), this);
-		
+
 		if(Config.autoRestart) {
 			scheduleTasks();
 		}
 		else {
 			log.info("[MMCEssentials] No automatic restarts scheduled!");
 		}
-		
+
 		if (Config.voteAllowed) {
 			justStartedTimer = new Timer();
 			this.justStartedTimer.schedule(new TimerTask() {
@@ -109,23 +114,32 @@ public class MMCEssentials extends JavaPlugin {
 				}
 			}, (long)(Config.startVoteTimer * 60 * 1000));
 		}
-		
-		Timer actionTimer = new Timer();
+
+		/*Timer actionTimer = new Timer();
 		actionTimer.scheduleAtFixedRate(new TimerTask() {
 			  @Override
 			  public void run() {
 				  action();
 			  }
-			}, 1000, 1000);
-		
-		/*getServer().getScheduler().scheduleSyncRepeatingTask(this, new Runnable()
+			}, 1000, 1000);*/
+
+		getServer().getScheduler().scheduleSyncRepeatingTask(this, new Runnable()
 		{
 			public void run()
 			{
 				action();
 			}
-		}, 20L, 20L);*/
-		
+		}, 20L, 1L);
+
+		Timer actionTimer = new Timer();
+		actionTimer.scheduleAtFixedRate(new TimerTask() {
+			@Override
+			public void run()
+			{
+				reduceVote();
+			}
+		}, 1000, 1000);
+
 	}
 	
 	public void action() {
@@ -133,8 +147,18 @@ public class MMCEssentials extends JavaPlugin {
 			displayRestart();
 		}
 		if (voteStarted == true && isRestarting == false && voteCancel == 0) {
-			voteSeconds -= 1;
 			displayVotes();
+		}
+	}
+	
+	public void reduceVote() {
+		if (voteStarted == true && isRestarting == false && voteCancel == 0) {
+			if (voteSeconds > 0) {
+				voteSeconds -= 1;
+			}
+			if (voteSeconds < 0) {
+				voteSeconds = 0;
+			}
 		}
 	}
 	
@@ -381,5 +405,18 @@ public class MMCEssentials extends JavaPlugin {
             e.printStackTrace();
         }
 	}
+	
+	public Block getTargetNonAirBlock(Player player, int maxDistance) throws IllegalStateException
+    {
+        BlockIterator iterator = new BlockIterator(player.getLocation(), player.getEyeHeight(), maxDistance);
+        Block result = player.getLocation().getBlock().getRelative(BlockFace.UP);
+        while (iterator.hasNext())
+        {
+            result = iterator.next();
+            if(result.getType() != Material.AIR) return result;
+        }
+        
+        return result;
+    }
 
 }

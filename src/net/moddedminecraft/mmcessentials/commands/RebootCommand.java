@@ -220,11 +220,11 @@ public class RebootCommand  implements CommandExecutor {
 				int seconds = (int)timeLeft % 60;
 
 				if (plugin.reason != null) {
-					Util.sendMessage(sender, "&bThe server will now be restarting in &f" + hours + "h" + minutes + "m" + seconds + "s, &bwith the reason: \n&d" + plugin.reason);
-					plugin.logToFile(sender.getName() + " scheduled a restart: " + hours + "h " + minutes + "m " + seconds + "s &bfrom now, with the reason: \n&d" + plugin.reason);
+					Util.sendMessage(true, sender, "&bThe server will now be restarting in &f" + hours + "h" + minutes + "m" + seconds + "s, &bwith the reason: \n&d" + plugin.reason);
+					//plugin.logToFile(sender.getName() + " scheduled a restart: " + hours + "h " + minutes + "m " + seconds + "s &bfrom now, with the reason: \n&d" + plugin.reason);
 				} else {
-					Util.sendMessage(sender, "&bThe server will now be restarting in &f" + hours + "h" + minutes + "m" + seconds + "s");
-					plugin.logToFile(sender.getName() + " scheduled a restart: " + hours + "h " + minutes + "m " + seconds + "s from now");
+					Util.sendMessage(true, sender, "&bThe server will now be restarting in &f" + hours + "h" + minutes + "m" + seconds + "s");
+					//plugin.logToFile(sender.getName() + " scheduled a restart: " + hours + "h " + minutes + "m " + seconds + "s from now");
 				}
 
 				return true;
@@ -381,8 +381,7 @@ public class RebootCommand  implements CommandExecutor {
 					Config.voteAllowed = false;
 					plugin.getConfig().set("voting.enable", false);
 				}
-			} else if (args.length == 1 && args[0].equalsIgnoreCase("yes"))
-			{
+			} else if (args.length == 1 && args[0].equalsIgnoreCase("yes")) {
 				if (plugin.hasVoted.contains(sender)) {
 					Util.sendMessage(sender, "&4You have already voted!");
 					return true;
@@ -399,8 +398,7 @@ public class RebootCommand  implements CommandExecutor {
 					Util.sendMessage(sender, "&4There is no vote running at the moment");
 					return true;
 				}
-			} else if (args.length == 1 && args[0].equalsIgnoreCase("cancel")) 
-			{
+			} else if (args.length == 1 && args[0].equalsIgnoreCase("cancel")) {
 				if (sender.hasPermission("mmcessentials.reboot.cancel")) 
 				{
 					plugin.voteCancel = 1;
@@ -413,9 +411,9 @@ public class RebootCommand  implements CommandExecutor {
 					Util.sendMessage(sender, ChatColor.RED + "You do not have permission to use this!");
 					return true;
 				}
-			} else if(args.length >= 1 && args[0].equalsIgnoreCase("debug")){
+			} else if(args.length >= 1 && args[0].equalsIgnoreCase("debug")) {
 				if (sender.hasPermission("mmcessentials.reboot.debug")) {
-					if(args.length == 1 && args[0].equalsIgnoreCase("debug")){
+					if(args.length == 1 && args[0].equalsIgnoreCase("debug")) {
 						sender.sendMessage("autorestart.enabled: " + Config.autoRestart);
 						sender.sendMessage("autorestart.interval: " + Config.restartInterval);
 						sender.sendMessage("timer.re-vote: " + Config.revoteTimer);
@@ -425,7 +423,7 @@ public class RebootCommand  implements CommandExecutor {
 						sender.sendMessage("timer.warning-broadcast: "  + Config.warnTimes);
 						return true;
 					}
-					else if(args.length == 2 && args[1].equalsIgnoreCase("display")){
+					else if(args.length == 2 && args[1].equalsIgnoreCase("display")) {
 						if (plugin.voteStarted = true) {
 							plugin.displayVotes();
 						} else {
@@ -433,7 +431,7 @@ public class RebootCommand  implements CommandExecutor {
 						}
 						return true;
 					}
-					else if(args.length == 2 && args[1].equalsIgnoreCase("remove")){
+					else if(args.length == 2 && args[1].equalsIgnoreCase("remove")) {
 						Sboard.removeScoreboard();
 						return true;
 					}

@@ -5,15 +5,11 @@ author: Lee_lawd93
 depend: [ProtocolLib]
 commands:
    mmce:
-      description: Main command for MMC Essentials.
-      usage: |
-            usage:
-                /MMCE help
+    description: Main command for MMC Essentials.
+    usage: /MMCE help
    reboot:
-      description: restart the server!
-      usage: |
-            usage:
-                /Reboot help
+    description: restart the server!
+    usage: /Reboot help
 permissions:
   mmcessentials.*:
     description: Provide all the permissions.

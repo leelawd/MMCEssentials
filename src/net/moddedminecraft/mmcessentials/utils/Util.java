@@ -31,6 +31,17 @@ public class Util {
 		}
 	}
 
+	public static void sendMessage(Boolean log, CommandSender sender, String message) {
+		if(sender instanceof Player) {
+			sender.sendMessage(processColours(message));
+		} else {
+			sender.sendMessage(stripColours(message));
+		}
+		if (log == true) {
+			plugin.logToFile(message);
+		}
+	}
+
 	public static int roundUP(double d){
 		double dAbs = Math.abs(d);
 		int i = (int) dAbs;
