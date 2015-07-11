@@ -11,6 +11,8 @@ Join us at http://www.moddedminecraft.net !
 A download for this will be provided as soon as possible.
 
 ###Installation
+Some features of this plugin require ProtocalLib. It is not essential to run though.
+
 Just drop, restart and go. No configuration is needed.
 You can look at the config.yml and change what you want however.
 
