@@ -75,6 +75,9 @@ public class MMCECommand implements CommandExecutor {
 		if (sender.hasPermission("mmcessentials.reload")) {
 			helpList.add(new Helplist("&3/mmce &breload - &7reload the plugin config.yml"));
 		}
+		if (sender.hasPermission("mmcessentials.blockinfo")) {
+			helpList.add(new Helplist("&3/blockinfo - &7In-hand and In-world block info."));
+		}
 
 		for(int i = 0; i < helpList.size(); i++) {
 			Util.sendMessage(sender, helpList.get(i).command);

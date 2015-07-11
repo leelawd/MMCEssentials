@@ -413,7 +413,11 @@ public class RebootCommand  implements CommandExecutor {
 				}
 			} else if(args.length >= 1 && args[0].equalsIgnoreCase("debug")) {
 				if (sender.hasPermission("mmcessentials.reboot.debug")) {
-					if(args.length == 1 && args[0].equalsIgnoreCase("debug")) {
+					if(args.length == 1) {
+						sender.sendMessage("Usage: /reboot debug (values/display/remove/delvote/addvote)");
+						return true;
+					}
+					else if(args.length == 2 && args[1].equalsIgnoreCase("values")) {
 						sender.sendMessage("autorestart.enabled: " + Config.autoRestart);
 						sender.sendMessage("autorestart.interval: " + Config.restartInterval);
 						sender.sendMessage("timer.re-vote: " + Config.revoteTimer);
@@ -421,6 +425,8 @@ public class RebootCommand  implements CommandExecutor {
 						sender.sendMessage("timer.vote-percent: "  + Config.votePercent);
 						sender.sendMessage("timer.minimum-players: "  + Config.minPlayers);
 						sender.sendMessage("timer.warning-broadcast: "  + Config.warnTimes);
+						sender.sendMessage("isRestarting: "  + plugin.isRestarting);
+						sender.sendMessage("voteStarted: "  + plugin.voteStarted);
 						return true;
 					}
 					else if(args.length == 2 && args[1].equalsIgnoreCase("display")) {
@@ -450,6 +456,16 @@ public class RebootCommand  implements CommandExecutor {
 							plugin.displayVotes();
 						} else {
 							Util.sendMessage(sender, "&cThere is no vote running right now.");
+						}
+						return true;
+					}
+					else if (args.length == 2 && args[1].equalsIgnoreCase("started")) {
+						if (plugin.justStarted = true) {
+							plugin.justStarted = false;
+							Util.sendMessage(sender, "justStarted: " + plugin.justStarted);
+						} else {
+							plugin.justStarted = true;
+							Util.sendMessage(sender, "justStarted: " + plugin.justStarted);
 						}
 						return true;
 					}

@@ -1,9 +1,12 @@
 name: MMCEssentials
 main: net.moddedminecraft.mmcessentials.MMCEssentials
-version: 0.5
+version: 0.6
 author: Lee_lawd93
 depend: [ProtocolLib]
 commands:
+   blockinfo:
+    description: Main command for MMC Essentials.
+    usage: /Blockfinfo
    mmce:
     description: Main command for MMC Essentials.
     usage: /MMCE help
