@@ -12,7 +12,6 @@ import net.moddedminecraft.mmcessentials.MMCEssentials;
 
 public class Util {
 
-	@SuppressWarnings("unused")
 	private static MMCEssentials plugin;
 
 	public Util(MMCEssentials instance) {
@@ -38,7 +37,7 @@ public class Util {
 			sender.sendMessage(stripColours(message));
 		}
 		if (log == true) {
-			plugin.logToFile(message);
+			plugin.logToFile(sender.getName() + ": " + stripColours(message));
 		}
 	}
 

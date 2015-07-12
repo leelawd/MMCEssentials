@@ -3,16 +3,14 @@ package net.moddedminecraft.mmcessentials.utils;
 import net.moddedminecraft.mmcessentials.MMCEssentials;
 
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.scoreboard.DisplaySlot;
-import org.bukkit.scoreboard.Objective;
-import org.bukkit.scoreboard.Score;
 import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.scoreboard.ScoreboardManager;
 
 public class Sboard {
 	
+	@SuppressWarnings("unused")
 	private static MMCEssentials plugin;
 
 	public Sboard(MMCEssentials instance) {

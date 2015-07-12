@@ -66,18 +66,18 @@ public class CommandListener implements Listener {
 			}
 		}
 
-		boolean cofh = event.getMessage().equalsIgnoreCase("/cofh countblocks");
-		boolean cofh2 = event.getMessage().equalsIgnoreCase("/cofh enchant");
-		boolean cofh3 = event.getMessage().equalsIgnoreCase("/cofh version");
-		boolean cofh4 = event.getMessage().equalsIgnoreCase("/cofh clearblocks");
-		boolean cofh5 = event.getMessage().equalsIgnoreCase("/cofh killall");
-		boolean cofh6 = event.getMessage().equalsIgnoreCase("/cofh unloadchunk");
-		boolean cofh7 = event.getMessage().equalsIgnoreCase("/cofh reloadworldgen");
-		boolean cofh8 = event.getMessage().equalsIgnoreCase("/cofh tpx");
-		boolean cofh9 = event.getMessage().equalsIgnoreCase("/cofh syntax");
-		boolean cofh10 = event.getMessage().equalsIgnoreCase("/cofh tps");
-		boolean cofh11 = event.getMessage().equalsIgnoreCase("/cofh help");
-		boolean cofh12 = event.getMessage().equalsIgnoreCase("/cofh replaceblocks");
+		boolean cofh = event.getMessage().startsWith("/cofh countblocks");
+		boolean cofh2 = event.getMessage().startsWith("/cofh enchant");
+		boolean cofh3 = event.getMessage().startsWith("/cofh version");
+		boolean cofh4 = event.getMessage().startsWith("/cofh clearblocks");
+		boolean cofh5 = event.getMessage().startsWith("/cofh killall");
+		boolean cofh6 = event.getMessage().startsWith("/cofh unloadchunk");
+		boolean cofh7 = event.getMessage().startsWith("/cofh reloadworldgen");
+		boolean cofh8 = event.getMessage().startsWith("/cofh tpx");
+		boolean cofh9 = event.getMessage().startsWith("/cofh syntax");
+		boolean cofh10 = event.getMessage().startsWith("/cofh tps");
+		boolean cofh11 = event.getMessage().startsWith("/cofh help");
+		boolean cofh12 = event.getMessage().startsWith("/cofh replaceblocks");
 		boolean cofh13 = event.getMessage().startsWith("/cofh friend");
 
 		if ((cofh) || (cofh2) || (cofh3) || (cofh4) || (cofh5) || (cofh6) || (cofh7) || (cofh8) || (cofh9) || (cofh10) || (cofh11) || (cofh12)) {
